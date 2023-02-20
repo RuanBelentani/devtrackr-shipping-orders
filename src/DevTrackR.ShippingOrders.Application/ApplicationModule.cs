@@ -1,4 +1,5 @@
 using DevTrackR.ShippingOrders.Application.Services;
+using DevTrackR.ShippingOrders.Application.Subscribers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevTrackR.ShippingOrders.Application
@@ -8,6 +9,8 @@ namespace DevTrackR.ShippingOrders.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddApplicationServices();
+            services.AddSubscribers();
+            
             return services;
         }
 
@@ -15,6 +18,13 @@ namespace DevTrackR.ShippingOrders.Application
         {
             services.AddScoped<IShippingOrderService, ShippingOrderService>();
             services.AddScoped<IShippingServiceService, ShippingServiceService>();
+            return services;
+        }
+
+        private static IServiceCollection AddSubscribers(this IServiceCollection services)
+        {
+            services.AddHostedService<ShippingOrderCompletedSubscriber>();
+
             return services;
         }
     }
