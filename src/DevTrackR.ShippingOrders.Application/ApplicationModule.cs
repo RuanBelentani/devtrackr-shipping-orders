@@ -9,7 +9,7 @@ namespace DevTrackR.ShippingOrders.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddApplicationServices();
-            services.AddSubscribers();
+            //services.AddSubscribers();
             
             return services;
         }
